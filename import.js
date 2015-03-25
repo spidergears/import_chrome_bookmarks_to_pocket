@@ -2,11 +2,15 @@ var __request_code;
 var __access_token_string;
 
 function process_bookmarks ( bookmarks ) {
+    console.log("Beginning import...")
     for ( var i =0; i < bookmarks.length; i++ ) {
         var bookmark = bookmarks[i];
         if ( bookmark.url ) {
+            xmlhttp = make_xmlhttprequest("POST", "https://getpocket.com/v3/add", true)
             console.log( "Adding url: "+ bookmark.url );
-            xmlhttp = make_xmlhttprequest("POST", "https://getpocket.com/v3/add", false)
+            chota_div = document.createElement('div')
+            chota_div.innerHTML= "Added Url:  "+ bookmark.url;
+            document.getElementById("progress").appendChild(chota_div)   
             xmlhttp.send("consumer_key="+ consumer_key +"&" + __access_token_string +"&url="+ encodeURI(bookmark.url) + "&tags=ChromeBookmarks")
         }
 
@@ -14,6 +18,7 @@ function process_bookmarks ( bookmarks ) {
             process_bookmarks( bookmark.children );
         }
     }
+    console.log("Completed import...")
 }
 
 
@@ -43,7 +48,7 @@ function get_request_code (consumer_key) {
             lauch_chrome_webAuthFlow_and_return_access_token(request_code);
         }
     }
-    return (xmlhttp.send("consumer_key="+ consumer_key +"&redirect_uri="+ redirect_url))
+    xmlhttp.send("consumer_key="+ consumer_key +"&redirect_uri="+ redirect_url)
 
 }
 
