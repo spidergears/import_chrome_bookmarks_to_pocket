@@ -1,8 +1,8 @@
 {
-  "name": "PocketImport",
-  "short_name": "PocketImport",
+  "name": "ChromeToPocket",
+  "short_name": "ChromeToPocket",
   "description": "Import your chrome bookamrks to Pocket",
-  "version": "0.0",
+  "version": "0.1",
   "manifest_version": 2,
   "browser_action": {
       "default_icon": "import.png",
@@ -12,7 +12,7 @@
   "author": {"name": "spidergears", "twitter_handle": "spider_gears", "github": "http://github.com/spidergears"},
   "content_scripts": [ {
       "js": [ "import.js" ],
-      "matches": [ "http://*/*", "https://*/*"]
+      "matches": [ "https://*.getpocket.com/*"]
     }],
   "permissions": [ "bookmarks", "identity" ]
 }
